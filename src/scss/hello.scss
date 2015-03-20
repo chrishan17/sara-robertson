@@ -1,0 +1,9 @@
+$borderRadius: 20px;
+.hello {
+   border-radius: $borderRadius;
+}
+
+h1 {
+    border-radius: $borderRadius;
+    background-color: yellow;
+}
