@@ -1,2 +1,5 @@
-hello = "hello world"
-console.log hello
+$ = require 'jquery'
+hello = $ 'h1'
+
+hello.click ->
+  alert 'hello world'

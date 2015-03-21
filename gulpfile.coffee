@@ -1,17 +1,16 @@
 gulp = require 'gulp'
 gutil = require 'gulp-util'
 
-browserSync = require 'browser-sync'
+del = require 'del'
 sass = require 'gulp-sass'
-autoprefixer = require 'gulp-autoprefixer'
-coffeelint = require 'gulp-coffeelint'
 coffee = require 'gulp-coffee'
 uglify = require 'gulp-uglify'
-notify = require 'gulp-notify'
-del = require 'del'
-runSequence = require 'run-sequence'
-
-isProd = gutil.env.type is 'prod'
+browserSync = require 'browser-sync'
+autoprefixer = require 'gulp-autoprefixer'
+browserify = require 'browserify'
+gulpBrowserify = require 'gulp-browserify'
+transform = require 'vinyl-transform'
+rename = require 'gulp-rename'
 
 src =
     sass: 'src/scss/**/*.scss'
@@ -32,46 +31,57 @@ gulp.task 'browser-sync', ->
     browserSync.init files,
         server:
           baseDir: "./public"
-        # watchOptions:
-        #   debounceDelay: 1000
+        watchOptions:
+          debounceDelay: 1000
 
 gulp.task 'html', ->
     gulp.src(src.html)
     .pipe(gulp.dest(dest.html))
 
-gulp.task 'styles', ->
+gulp.task 'dev:css', ->
     gulp.src(src.sass)
-    .pipe(sass(outputStyle: 'compressed', errLogToConsole: true))
+    .pipe(sass(errLogToConsole: true))
     .pipe(autoprefixer(browsers: ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4']))
     .pipe(gulp.dest(dest.css))
-    # .pipe(notify(message: 'Styles task complete'))
 
-gulp.task 'lint', ->
-    gulp.src(src.coffee)
-    .pipe(coffeelint())
-    .pipe(coffeelint.reporter())
+gulp.task 'dev:js', ->
+    browserified = transform (filename) ->
+        b = browserify filename,
+            debug: true
+            extensions: ['.coffee']
+        b.bundle()
 
-gulp.task 'scripts', ->
     gulp.src(src.coffee)
-    .pipe(coffee(bare: true)).on('error', gutil.log)
-    .pipe(if isProd then uglify() else gutil.noop())
-    .pipe(gulp.dest(dest.js))
-    # .pipe(notify(message: 'Scripts task complete'))
+    .pipe(browserified)
+    .pipe(rename(extname: '.js'))
+    .pipe(gulp.dest('./public/js'))
 
 gulp.task 'watch', ->
-    gulp.watch src.sass, ['styles']
-    gulp.watch src.coffee, ['scripts']
+    gulp.watch src.sass, ['dev:css']
+    gulp.watch src.coffee, ['dev:js']
     gulp.watch src.html, ['html']
 
     gulp.watch 'public/**/**', (file) ->
-        console.log file
-        browserSync.reload(file.path) if file.type is "changed"
+        if file.type is "changed"
+            browserSync.reload(file.path)
+
+gulp.task 'build:css', ->
+    gulp.src(src.sass)
+    .pipe(sass(outputStyle: 'compressed'))
+    .pipe(autoprefixer(browsers: ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4']))
+    .pipe(gulp.dest(dest.css))
+
+gulp.task 'build:js', ->
+    gulp.src(src.coffee, read: false)
+    .pipe(gulpBrowserify(extensions: ['.coffee'], debug: false))
+    .pipe(uglify())
+    .pipe(rename(extname: '.js'))
+    .pipe(gulp.dest(dest.js))
 
 gulp.task 'clean', ->
     del(['public/css', 'public/js', 'public/index.html'])
 
-gulp.task 'build', ->
-    runSequence 'clean', ['styles', 'scripts', 'html', 'lint']
+gulp.task 'default', ['dev:css', 'dev:js', 'html', 'watch', 'browser-sync']
 
-gulp.task 'default', ->
-    runSequence ['build', 'browser-sync', 'watch']
+gulp.task 'build', ['build:css', 'build:js']
+

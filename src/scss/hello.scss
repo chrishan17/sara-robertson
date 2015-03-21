@@ -1,6 +1,8 @@
 $borderRadius: 20px;
 .hello {
    border-radius: $borderRadius;
+   appearance: none;
+   display: flex;
 }
 
 h1 {
