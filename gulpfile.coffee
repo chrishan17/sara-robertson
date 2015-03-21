@@ -9,18 +9,23 @@ browserSync = require 'browser-sync'
 autoprefixer = require 'gulp-autoprefixer'
 browserify = require 'browserify'
 gulpBrowserify = require 'gulp-browserify'
-transform = require 'vinyl-transform'
 rename = require 'gulp-rename'
+watchify = require 'watchify'
+source = require 'vinyl-source-stream'
+buffer = require 'vinyl-buffer'
+sourcemaps = require 'gulp-sourcemaps'
+glob = require 'glob'
+_ = require 'loadsh'
 
 src =
-    sass: 'src/scss/**/*.scss'
-    html: 'index.html'
-    coffee: 'src/coffee/**/*.coffee'
+    sass: './src/scss/**/*.scss'
+    html: './index.html'
+    coffee: './src/coffee/**/*.coffee'
 
 dest =
-    css: 'public/css/'
-    html: 'public/'
-    js: 'public/js/'
+    css: './public/css/'
+    html: './public/'
+    js: './public/js/'
 
 gulp.task 'browser-sync', ->
     files = [
@@ -45,16 +50,20 @@ gulp.task 'dev:css', ->
     .pipe(gulp.dest(dest.css))
 
 gulp.task 'dev:js', ->
-    browserified = transform (filename) ->
-        b = browserify filename,
-            debug: true
-            extensions: ['.coffee']
-        b.bundle()
+    glob src.coffee, {}, (err, files) ->
+        _.each files, (file) ->
+            filename = file.split('/').pop()
+            bundler = watchify browserify(file, watchify.args)
+            bundler.on 'error', gutil.log.bind(gutil, 'Browserify Error')
 
-    gulp.src(src.coffee)
-    .pipe(browserified)
-    .pipe(rename(extname: '.js'))
-    .pipe(gulp.dest('./public/js'))
+            bundler.bundle()
+            .pipe(source(filename))
+            .pipe(buffer())
+            .pipe(rename(extname: '.js'))
+            .pipe(sourcemaps.init(loadMaps: true))
+            .pipe(sourcemaps.write('./'))
+            .pipe(gulp.dest(dest.js))
+
 
 gulp.task 'watch', ->
     gulp.watch src.sass, ['dev:css']
