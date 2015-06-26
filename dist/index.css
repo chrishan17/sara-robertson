@@ -1,3 +1,5 @@
+/* use Google font Roboto which is for Material Design */
+/* use border-box globally */
 html {
   font-family: 'Roboto', 'helvetica', arial, sans-serif;
   font-weight: 300;
@@ -5,6 +7,7 @@ html {
           box-sizing: border-box;
 }
 
+/* refer to the sike css0to1 course */
 *,
 *:before,
 *:after {
@@ -12,11 +15,13 @@ html {
           box-sizing: inherit;
 }
 
+/* set body background */
 body {
   background: #2b343c url(http://i4.tietuku.com/7e9b14cb11bd9308.jpg) center center fixed no-repeat;
   background-size: cover;
 }
 
+/* to all the button */
 .btn {
   cursor: pointer;
 }
@@ -32,12 +37,13 @@ body {
           box-shadow: 0 20px 14px -14px #171a1f;
 }
 
-/* profile header  */
+/* set background-image and background-color for profile header */
 .profile-header {
   height: 140px;
   background: #e7ddcf url(http://i4.tietuku.com/a9912af6977e48ad.png) center top 20px no-repeat;
 }
 
+/* set padding: 1px; to prevent margin collapse */
 .profile-body {
   height: 248px;
   padding: 1px;
@@ -45,7 +51,8 @@ body {
   background-color: #2e353d;
 }
 
-.profile-body__container {
+/* set the avatar's position */
+.profile-body__avatar-container {
   width: 170px;
   height: 170px;
   margin: 0 auto;
@@ -56,6 +63,7 @@ body {
           box-shadow: 0 10px 9px -9px #171a1f;
 }
 
+/* set inset box-shadow for avatar */
 .profile-body__avatar {
   width: 156px;
   height: 156px;
@@ -79,6 +87,7 @@ body {
   color: #555d68;
 }
 
+/* use box-shadow to act as border */
 .profile-body__follow {
   width: 165px;
   height: 37px;
@@ -104,7 +113,7 @@ body {
   background-color: #30373e;
   border-top: 1px solid #171A1F;
 }
-
+/* use float: left to take the element from the normal flow */
 .profile-footer__item {
   float: left;
   width: 162px;
