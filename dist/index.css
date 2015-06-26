@@ -1,0 +1,131 @@
+html {
+  font-family: 'Roboto', 'helvetica', arial, sans-serif;
+  font-weight: 300;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+}
+
+body {
+  background: #2b343c url(http://i4.tietuku.com/7e9b14cb11bd9308.jpg) center center fixed no-repeat;
+  background-size: cover;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+.profile {
+  width: 326px;
+  height: 440px;
+  margin: 100px auto;
+  overflow: hidden;
+  border: 1px solid #171A1F;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 20px 14px -14px #171a1f;
+          box-shadow: 0 20px 14px -14px #171a1f;
+}
+
+/* profile header  */
+.profile-header {
+  height: 140px;
+  background: #e7ddcf url(http://i4.tietuku.com/a9912af6977e48ad.png) center top 20px no-repeat;
+}
+
+.profile-body {
+  height: 248px;
+  padding: 1px;
+  text-align: center;
+  background-color: #2e353d;
+}
+
+.profile-body__container {
+  width: 170px;
+  height: 170px;
+  margin: 0 auto;
+  margin-top: -81px;
+  border: 7px solid #e7ddcf;
+  border-radius: 50%;
+  -webkit-box-shadow: 0 10px 9px -9px #171a1f;
+          box-shadow: 0 10px 9px -9px #171a1f;
+}
+
+.profile-body__avatar {
+  width: 156px;
+  height: 156px;
+  background-image: url(http://i4.tietuku.com/29ef487491b4d8db.png);
+  border-radius: 50%;
+  -webkit-box-shadow: inset 0 0 10px -4px #171a1f;
+          box-shadow: inset 0 0 10px -4px #171a1f;
+}
+
+.profile-body__name {
+  margin-top: 28px;
+  font-size: 18px;
+  letter-spacing: 1.5px;
+  color: #e7ddcf;
+}
+
+.profile-body__job {
+  margin-top: 7px;
+  font-size: 12px;
+  letter-spacing: 1.1px;
+  color: #555d68;
+}
+
+.profile-body__follow {
+  width: 165px;
+  height: 37px;
+  margin: 0 auto;
+  margin-top: 27px;
+  overflow: hidden;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 37px;
+  letter-spacing: 1.5px;
+  color: #e7ddcf;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+  background-color: #c84936;
+  border-top: 1px solid #d46c5c;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 0 1px #171A1F;
+          box-shadow: 0 0 0 1px #171A1F;
+}
+
+.profile-footer {
+  height: 52px;
+  text-align: center;
+  background-color: #30373e;
+  border-top: 1px solid #171A1F;
+}
+
+.profile-footer__item {
+  float: left;
+  width: 162px;
+  font-size: 12px;
+  line-height: 50px;
+  color: #555d68;
+  border-top: 1px solid #3e424b;
+}
+
+.followers-btn {
+  border-right: 1px solid #3e424b;
+}
+
+.following-btn {
+  border-left: 1px solid #171A1F;
+}
+
+.profile-footer__numbers {
+  margin-right: 5px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: #171A1F;
+}

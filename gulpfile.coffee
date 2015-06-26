@@ -15,7 +15,7 @@ source = require 'vinyl-source-stream'
 buffer = require 'vinyl-buffer'
 sourcemaps = require 'gulp-sourcemaps'
 glob = require 'glob'
-_ = require 'loadsh'
+_ = require 'lodash'
 
 src =
     sass: './src/scss/**/*.scss'
