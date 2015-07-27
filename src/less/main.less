@@ -1,0 +1,121 @@
+@bodyColor: #2e353d;
+@footerColor: #30373e;
+@black: #171A1F;
+@white: #e7ddcf;
+@gray: #555d68;
+@red: #c84936;
+
+html {
+  font-family: 'Roboto', 'helvetica', arial, sans-serif;
+  font-weight: 300;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  background: #2b343c url(http://i4.tietuku.com/7e9b14cb11bd9308.jpg) center center fixed no-repeat;
+  background-size: cover;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+.profile-section {
+  width: 326px;
+  height: 440px;
+  margin: 100px auto;
+  border: 1px solid @black;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 20px 14px -14px @black;
+  header {
+    height: 140px;
+    background: @white url(http://i4.tietuku.com/a9912af6977e48ad.png) center top 20px no-repeat;;
+  }
+  footer {
+    height: 52px;
+    background-color: @footerColor;
+    border-top: 1px solid @black;
+    text-align: center;
+    .counter {
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      font-size: 15px;
+      color: @black;
+      margin-right: 5px;
+    }
+  }
+}
+
+.profile {
+  &__body {
+    text-align: center;
+    padding: 1px;
+    background-color: @bodyColor;
+    height: 248px;
+  }
+  &__avatar-container {
+    margin: 0 auto;
+    margin-top: -81px;
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    border: 7px solid @white;
+    box-shadow: 0 10px 9px -9px @black;
+  }
+  &__avatar {
+    width: 156px;
+    height: 156px;
+    border-radius: 50%;
+    background-image: url(http://i4.tietuku.com/29ef487491b4d8db.png);
+    box-shadow: inset 0 0 10px -4px @black;
+  }
+  &__name {
+    margin-top: 28px;
+    letter-spacing: 1.5px;
+    color: @white;
+    font-size: 18px;
+  }
+  &__job {
+    letter-spacing: 1.1px;
+    margin-top: 7px;
+    color: @gray;
+    font-size: 12px;
+  }
+  &__follow {
+    overflow: hidden;
+    margin: 0 auto;
+    margin-top: 27px;
+    font-size: 12px;
+    width: 165px;
+    height: 37px;
+    background-color: @red;
+    color: @white;
+    border-top: 1px solid #d46c5c;
+    box-shadow: 0 0 0 1px @black;
+    border-radius: 5px;
+    line-height: 37px;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    text-shadow: 0 0 3px rgba(0,0,0,0.3);
+  }
+  &__btn {
+    .btn();
+    width: 162px;
+    float: left;
+    border-top: 1px solid #3e424b;
+    font-size: 12px;
+    color: @gray;
+    line-height: 50px;
+    &--followers {
+      border-right: 1px solid #3e424b;
+    }
+    &-following {
+      border-left: 1px solid @black;
+    }
+  }
+}
